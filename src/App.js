@@ -4,7 +4,7 @@ import Person from './Person/Person';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background-color: green;
+  background-color: ${props => props.alt ? 'red':'green'};
   color: white;
   font: inherit;
   border: 1px solid blue;
@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: lightgreen;
+    background-color: ${props => props.alt ? 'salmon':'lightgreen'};
     color: black;
   }
 `;
@@ -54,18 +54,6 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
 
     let persons = null;
     if(this.state.showPersons){
@@ -87,12 +75,6 @@ class App extends Component {
             }
         </div> 
       );
-      style.backgroundColor = 'red';
-      style[':hover']= {
-            backgroundColor: 'salmon',
-            color: 'black'
-          }
-
     }
 
     const classes = [];
@@ -108,7 +90,7 @@ class App extends Component {
         <div className="App">
             <h1>Hi, I'm a React App</h1>
             <p className={classes.join(' ')}>This is really working!</p>
-            <StyledButton onClick={this.togglePersonHandler}>Toggle Persons</StyledButton>
+            <StyledButton alt={this.state.showPersons} onClick={this.togglePersonHandler}>Toggle Persons</StyledButton>
             {persons}
         </div>
 
