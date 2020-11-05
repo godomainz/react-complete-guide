@@ -4,10 +4,21 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from  '../components/Cockpit/Cockpit';
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    console.log('[App.js] constructor');
+  }
+
   state = {
     persons: [{id:1, name:"Max", age:28},{id:2, name:"Manu", age:29},{id:3, name:"Stephanie", age:26}],
     otherState:"Some Otherstate",
     showPersons:false
+  }
+
+  static getDerivedStateFromProps(props,state){
+    console.log('[App.js] getDerivedStateFromProps ',props);
+    return state;
   }
 
  
@@ -39,8 +50,16 @@ class App extends Component {
     this.setState({showPersons:!doesShow})
   }
 
-  render() {
+  UNSAFE_componentWillMount(nextProps){
+    console.log('[App.js] componentWillMount ',nextProps);
+    console.log('[App.js] componentWillMount ');
+  }
 
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
+  render() {
+    console.log('[App.js] render');
     let persons = null;
 
     if(this.state.showPersons){
