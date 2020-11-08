@@ -24,7 +24,11 @@ class Persons extends Component<Props>{
   
   shouldComponentUpdate(nextProps:any,nextState:any):any{
     console.log('[Persons.tsx] shouldComponentUpdate');
-    return true;
+    if( nextProps.persons !== this.props.persons ){
+      return true;
+    }
+    return false;
+    // return true;
   }
 
   getSnapshotBeforeUpdate(prevProps:any,prevState:any){
