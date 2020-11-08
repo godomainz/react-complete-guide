@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import Aux from '../../../hoc/Auxilary';
+import React, {Component, Fragment} from 'react';
+// import Aux from '../../../hoc/Auxilary';
 // import classes from './Person.module.css';
 interface Props {
     click:any;
@@ -16,11 +16,11 @@ class Person extends Component<Props>{
     render(){
         console.log('[Person.tsx] rendering .....');
         return(
-            <Aux>
+            <Fragment>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old</p>
                 <p>{this.props.children}</p>
                 <input type="text" onChange={this.props.changed} value={this.props.name}/>
-            </Aux>   
+            </Fragment>   
         );  
     }
     
