@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from './Person.css'
+import classes from './Person.module.css'
 
-const person = (props)=>{
+const person = (props:any)=>{
     console.log('[Person.js] rendering .....');
     return (
         <div className={classes.Person}> 
