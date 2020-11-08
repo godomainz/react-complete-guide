@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.module.css';
 
-const cockpit = (props:any) => {
-
+const Cockpit = (props:any) => {
+    useEffect(()=>{
+      console.log('[Cockpit.tsx] useEffect');
+      // Http request...
+    });
     
     const assignedClasses = [];
 
@@ -32,4 +35,4 @@ const cockpit = (props:any) => {
     
 
 
-export default cockpit;
+export default Cockpit;
