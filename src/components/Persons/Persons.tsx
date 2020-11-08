@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{PureComponent} from 'react';
 import Person from './Person/Person';
 interface Props {
   persons:any;
@@ -6,7 +6,7 @@ interface Props {
   changed:any;
 }
 
-class Persons extends Component<Props>{
+class Persons extends PureComponent<Props>{
   constructor(props:any){
     super(props);
     console.log('[Persons.tsx] constructor');
@@ -22,14 +22,16 @@ class Persons extends Component<Props>{
   // }
 
   
-  shouldComponentUpdate(nextProps:any,nextState:any):any{
-    console.log('[Persons.tsx] shouldComponentUpdate');
-    if( nextProps.persons !== this.props.persons ){
-      return true;
-    }
-    return false;
-    // return true;
-  }
+  // shouldComponentUpdate(nextProps:any,nextState:any):any{
+  //   console.log('[Persons.tsx] shouldComponentUpdate');
+  //   if( nextProps.persons !== this.props.persons || 
+  //     nextProps.changed !== this.props.changed || 
+  //     nextProps.clicked !== this.props.clicked ){
+  //     return true;
+  //   }
+  //   return false;
+  //   // return true;
+  // }
 
   getSnapshotBeforeUpdate(prevProps:any,prevState:any){
     console.log('[Persons.tsx] getSnapshotBeforeUpdate');
