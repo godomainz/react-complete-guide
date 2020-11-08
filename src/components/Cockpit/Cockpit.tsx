@@ -5,7 +5,10 @@ const Cockpit = (props:any) => {
     useEffect(()=>{
       console.log('[Cockpit.tsx] useEffect');
       // Http request...
-    });
+      setTimeout(()=>{
+        alert('Saved data to the cloud');
+      },1000);
+    },[]);
     
     const assignedClasses = [];
 
