@@ -16,10 +16,19 @@ class Person extends Component<Props>{
         age: PropTypes.number,
         changed: PropTypes.func
     };
+
+    inputElementRef:any;
+
     constructor(props:any){
         super(props);
         console.log('[Person.tsx] constructor');
+        this.inputElementRef = React.createRef<HTMLInputElement>();
       }
+
+    componentDidMount() {
+        // this.inputElementRef.focus();
+        this.inputElementRef.current.focus();
+    }
 
     render(){
         console.log('[Person.tsx] rendering .....');
@@ -27,7 +36,10 @@ class Person extends Component<Props>{
             <Aux>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old</p>
                 <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.changed} value={this.props.name}/>
+                <input type="text" 
+                // ref={(inputEl) => { this.inputElementRef = inputEl }} 
+                ref={this.inputElementRef}
+                onChange={this.props.changed} value={this.props.name}/>
             </Aux>   
         );  
     }
