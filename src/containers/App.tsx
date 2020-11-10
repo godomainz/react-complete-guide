@@ -21,7 +21,8 @@ class App extends Component<Props> {
     otherState:"Some Otherstate",
     showPersons:false,
     showCockpit:true,
-    changeCounter:0
+    changeCounter:0,
+    authenticated:false
   }
 
   static getDerivedStateFromProps(props:any,state:any){
@@ -79,21 +80,40 @@ class App extends Component<Props> {
   componentDidMount() {
     console.log('[App.tsx] componentDidMount');
   }
+
+  loginHandler = ()=>{
+    this.setState({ authenticated:true })
+  }
+
   render() {
     console.log('[App.tsx] render');
     let persons = null;
 
     if(this.state.showPersons){
-      persons = <Persons persons={this.state.persons} clicked={this.deletePersonHandler} changed={this.nameChangedHandler}></Persons> ;
+      persons = (
+        <Persons 
+          persons= { this.state.persons } 
+          clicked= { this.deletePersonHandler } 
+          changed= { this.nameChangedHandler }
+          isAuthenticated = { this.state.authenticated }
+          >
+          
+        </Persons> 
+      );
     }
 
-    
-    
+
     return (
         <Aux>
             <button onClick={()=>{this.setState({ showCockpit:false })}}>Remove cockpit</button>
-            {this.state.showCockpit ? <Cockpit title={this.props.appTitle} showPersons={this.state.showPersons} personsLength={this.state.persons.length} clicked={this.togglePersonHandler}>
-            </Cockpit>:null
+            {this.state.showCockpit ? (
+            <Cockpit 
+                title={this.props.appTitle} 
+                showPersons={this.state.showPersons} 
+                personsLength={this.state.persons.length}
+                login={ this.loginHandler }
+                clicked={this.togglePersonHandler} >
+            </Cockpit>):null
             }
             
             {persons }

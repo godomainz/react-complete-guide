@@ -8,6 +8,7 @@ interface Props {
     name:string;
     age:number;
     changed:any;
+    isAuth:boolean;
 }
 class Person extends Component<Props>{
     static propTypes = {
@@ -34,6 +35,7 @@ class Person extends Component<Props>{
         console.log('[Person.tsx] rendering .....');
         return(
             <Aux>
+                {this.props.isAuth ? <p>Authenticated</p>:<p>Please Log in</p>}
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old</p>
                 <p>{this.props.children}</p>
                 <input type="text" 

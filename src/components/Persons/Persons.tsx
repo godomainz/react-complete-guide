@@ -4,6 +4,7 @@ interface Props {
   persons:any;
   clicked:any;
   changed:any;
+  isAuthenticated:boolean;
 }
 
 class Persons extends PureComponent<Props>{
@@ -62,6 +63,7 @@ class Persons extends PureComponent<Props>{
               age={person.age} 
               changed={(event:any)=>this.props.changed(event, person.id)}
               key={person.id}
+              isAuth = { this.props.isAuthenticated  }
             >
           </Person>            
       );
