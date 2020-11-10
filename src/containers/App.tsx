@@ -20,7 +20,8 @@ class App extends Component<Props> {
     persons: [{id:1, name:"Max", age:28},{id:2, name:"Manu", age:29},{id:3, name:"Stephanie", age:26}],
     otherState:"Some Otherstate",
     showPersons:false,
-    showCockpit:true
+    showCockpit:true,
+    changeCounter:0
   }
 
   static getDerivedStateFromProps(props:any,state:any){
@@ -49,8 +50,13 @@ class App extends Component<Props> {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
     
-
-    this.setState({persons: persons});
+    console.log('nameChangedHandler');    
+    this.setState((prevState:any,props)=> {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter+1
+      };
+    });
   }
 
   deletePersonHandler = (personIndex:number)=>{
