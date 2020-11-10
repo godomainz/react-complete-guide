@@ -1,5 +1,7 @@
 import React,{PureComponent} from 'react';
 import Person from './Person/Person';
+
+
 interface Props {
   persons:any;
   clicked:any;
@@ -54,6 +56,7 @@ class Persons extends PureComponent<Props>{
 
   render(){
     console.log('[Persons.js] rendering .....');
+
     return this.props.persons.map((person:any, index:number)=>{
     
       return(
@@ -63,7 +66,6 @@ class Persons extends PureComponent<Props>{
               age={person.age} 
               changed={(event:any)=>this.props.changed(event, person.id)}
               key={person.id}
-              isAuth = { this.props.isAuthenticated  }
             >
           </Person>            
       );
