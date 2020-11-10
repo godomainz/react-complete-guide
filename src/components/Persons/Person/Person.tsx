@@ -13,12 +13,15 @@ interface Props {
     isAuth:boolean;
 }
 class Person extends Component<Props>{
+
     static propTypes = {
         click: PropTypes.func,
         name: PropTypes.string,
         age: PropTypes.number,
         changed: PropTypes.func
     };
+
+    static contextType = AuthContext;
 
     inputElementRef:any;
 
@@ -29,20 +32,17 @@ class Person extends Component<Props>{
       }
 
     componentDidMount() {
-        // this.inputElementRef.focus();
         this.inputElementRef.current.focus();
+        console.log(this.context.authenticated);
     }
 
     render(){
         console.log('[Person.tsx] rendering .....');
         return(
             <Aux>
-                <AuthContext.Consumer>
-                    {
-                        (context) => context.authenticated ? <p>Authenticated</p>:<p>Please Log in</p>
-                    }
-                </AuthContext.Consumer>
-                
+                {
+                    this.context.authenticated ? <p>Authenticated</p>:<p>Please Log in</p>
+                }
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old</p>
                 <p>{this.props.children}</p>
                 <input type="text" 
@@ -54,6 +54,5 @@ class Person extends Component<Props>{
     }
     
 }
-
 
 export default withClass(Person, classes.Person);
