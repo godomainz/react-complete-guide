@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import withClass from '../../../hoc/withClass'; 
 import Aux from '../../../hoc/Auxilary';
 import classes from './Person.module.css';
@@ -9,6 +10,12 @@ interface Props {
     changed:any;
 }
 class Person extends Component<Props>{
+    static propTypes = {
+        click: PropTypes.func,
+        name: PropTypes.string,
+        age: PropTypes.number,
+        changed: PropTypes.func
+    };
     constructor(props:any){
         super(props);
         console.log('[Person.tsx] constructor');
@@ -26,5 +33,6 @@ class Person extends Component<Props>{
     }
     
 }
+
 
 export default withClass(Person, classes.Person);
