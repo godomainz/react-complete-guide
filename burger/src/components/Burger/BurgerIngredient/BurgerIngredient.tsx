@@ -3,7 +3,7 @@ import classes from './BurgerIngredient.module.css';
 import PropTypes from 'prop-types';
 
 interface Props {
-    type:any,
+    type:string,
 }
 
 class BurgerIngredient extends Component<Props>{
