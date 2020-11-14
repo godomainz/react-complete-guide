@@ -10,10 +10,6 @@ class BurgerIngredient extends Component<Props>{
     static propTypes = {
         type: PropTypes.string.isRequired,
     }
-    constructor(props:any){
-        super(props);
-        console.log('[Person.tsx] constructor');
-    }
 
     render() {
         let ingredient = null;
