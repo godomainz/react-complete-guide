@@ -13,7 +13,7 @@ const  OrderSummary = (props:any) => {
             <ul>
                 {indrentSummery}
             </ul>
-            <p>Continu to Checkout</p>
+            <p>Continue to Checkout ?</p>
         </Aux>
     );
     
