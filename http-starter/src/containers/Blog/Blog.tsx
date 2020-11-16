@@ -6,9 +6,14 @@ import FullPost from '../../components/FullPost/FullPost';
 import NewPost from '../../components/NewPost/NewPost';
 import classes from './Blog.module.css';
 
-class Blog extends Component {
+interface State {
+    posts:[],
+    selectedPostID:number
+}
 
-    state = {
+class Blog extends Component{
+
+    state:State = {
         posts: [],
         selectedPostID: null
     }
