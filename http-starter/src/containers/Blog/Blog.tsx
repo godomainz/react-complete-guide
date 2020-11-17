@@ -8,14 +8,16 @@ import classes from './Blog.module.css';
 
 interface State {
     posts:[],
-    selectedPostID:number
+    selectedPostID:number,
+    error: boolean
 }
 
 class Blog extends Component{
 
     state:State = {
         posts: [],
-        selectedPostID: null
+        selectedPostID: null,
+        error:false
     }
 
     componentDidMount() {
@@ -30,6 +32,9 @@ class Blog extends Component{
             });
             // console.log(updatedPosts);
             this.setState({posts: updatedPosts});
+        }).catch((error)=>{
+            // console.log(error);
+            this.setState({error: true});
         });
 
     }
@@ -39,13 +44,17 @@ class Blog extends Component{
     }
 
     render () {
-        const posts = this.state.posts.map((post:any)=>{
-            return <Post 
-                        key={post.id} 
-                        title={post.title} 
-                        author={post.author}
-                        clicked={() => this.postSelected(post.id)}/>
-        });
+        let posts:any = <p style={{textAlign: "center"}}>Something went wrong</p>;
+        if (!this.state.error){
+            posts = this.state.posts.map((post:any)=>{
+                return <Post 
+                            key={post.id} 
+                            title={post.title} 
+                            author={post.author}
+                            clicked={() => this.postSelected(post.id)}/>
+            });
+        }
+        
         return (
             <div>
                 <section className={classes.Posts}>
