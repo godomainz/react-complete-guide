@@ -3,9 +3,9 @@ import Aux from '../../../hoc/Auxilary/Auxilary';
 import BackDrop from '../Backdrop/Backdrop';
 import classes from './Modal.module.css';
 
-interface Props {
+type Props = {
    show: boolean;
-   modalClosed: any;
+   modalClosed?: any;
 }
 
 class Modal extends Component<Props> {
