@@ -11,11 +11,19 @@ interface State {
 const WithErrorHandler = (WrappedComponent:any, axios:AxiosInstance) => {
 
      return class extends Component {
+        
         state:State= {
-            error: null
+            error: null,
         }
-        constructor(props:any){
-            super(props);
+        requestInterceptor:any;
+        responseInterceptor:any;
+
+        componentWillUnmount(){
+            axios.interceptors.request.eject(this.requestInterceptor);
+            axios.interceptors.response.eject(this.responseInterceptor);
+        }
+
+        UNSAFE_componentWillMount(){
             axios.interceptors.request.use((request) =>{
                 this.setState({error: null});
                 return request;
@@ -27,20 +35,6 @@ const WithErrorHandler = (WrappedComponent:any, axios:AxiosInstance) => {
                 return Promise.reject(error);
             })
         }
-
-
-        // componentWillMount(){
-        //     axios.interceptors.request.use((request) =>{
-        //         this.setState({error: null});
-        //         return request;
-        //     });
-
-        //     axios.interceptors.response.use(res=>res, error => {
-        //         console.log(error.message);
-        //         this.setState({error: error});
-        //         return Promise.reject(error);
-        //     })
-        // }
 
         errorConfirmedHandler = () =>{
             this.setState({error: null});
