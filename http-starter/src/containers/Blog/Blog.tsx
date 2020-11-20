@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import axios from '../../axios';
 
 import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
 import classes from './Blog.module.css';
 
 interface State {
@@ -33,7 +31,7 @@ class Blog extends Component{
             });
             // console.log(updatedPosts);
             this.setState({posts: updatedPosts});
-        }).catch((error)=>{
+        }).catch(()=>{
             // console.log(error);
             this.setState({error: true});
         });
@@ -68,12 +66,6 @@ class Blog extends Component{
                 </header>
                 <section className={classes.Posts}>
                     {posts}
-                </section>
-                <section>
-                    <FullPost id={Number(this.state.selectedPostID)}/>
-                </section>
-                <section>
-                    <NewPost />
                 </section>
             </div>
         );
