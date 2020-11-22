@@ -17,7 +17,7 @@ instance.interceptors.request.use((request:any)=>{
   );
   
 instance.interceptors.response.use((response:any)=>{
-    console.log(response);
+    // console.log(response);
     return response;
   },(error)=>{
     // console.log(error);
