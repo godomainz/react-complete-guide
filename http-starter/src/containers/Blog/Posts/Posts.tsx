@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Post from '../../../components/Post/Post';
 import axios from '../../../axios';
 import classes from './Posts.module.css';
-import { Link } from 'react-router-dom';
 
 interface State {
      posts:[],
@@ -10,7 +9,11 @@ interface State {
      error: boolean
  }
 
-class Posts extends Component {
+interface Props {
+     history: any;
+}
+
+class Posts extends Component<Props> {
 
      state:State = {
           posts: [],
@@ -39,7 +42,9 @@ class Posts extends Component {
       }
   
       postSelected = (id:number) => {
-          this.setState({selectedPostID: id});
+          // this.setState({selectedPostID: id});
+          this.props.history.push({pathname: '/' + id});
+          // this.props.history.push('/'+id);
       }
 
      render(){
@@ -47,12 +52,13 @@ class Posts extends Component {
           if (!this.state.error){
                posts = this.state.posts.map((post:any)=>{
                     return (
-                         <Link key={post.id} to={'/'+post.id}>
+                         // <Link key={post.id} to={'/'+post.id}>
                                    <Post 
-                                             title={post.title} 
-                                             author={post.author}
-                                             clicked={() => this.postSelected(post.id)}/>
-                         </Link>
+                                        key={post.id}
+                                        title={post.title} 
+                                        author={post.author}
+                                        clicked={() => this.postSelected(post.id)}/>
+                         // </Link>
                     )
                });
           }
