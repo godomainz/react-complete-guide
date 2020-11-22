@@ -15,6 +15,7 @@ class NewPost extends Component<Props> {
         submitted: false
     }
     componentDidMount() {
+        // If unauth => this.props.history.replace('/posts');
         console.log(this.props);
     }
 

@@ -4,7 +4,15 @@ import classes from './Blog.module.css';
 import NewPost from './NewPost/NewPost';
 import Posts from './Posts/Posts';
 
+interface State {
+    auth: boolean;
+}
+
 class Blog extends Component{
+
+    state: State = {
+        auth: false
+    }
 
     render () {
         return (
@@ -26,7 +34,7 @@ class Blog extends Component{
                 </header>
                 {/* <Route path="/" exact render={()=><Posts/>} /> */}
                 <Switch>
-                    <Route path="/new-post" component={NewPost} />
+                    {this.state.auth ? <Route path="/new-post" component={NewPost} /> : null}
                     <Route path="/posts" component={Posts} />
                     <Redirect from='/' to='/posts' />
                     {/* <Route path="/" component={Posts} /> */}
