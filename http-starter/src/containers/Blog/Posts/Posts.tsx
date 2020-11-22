@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Post from '../../../components/Post/Post';
 import axios from '../../../axios';
 import classes from './Posts.module.css';
+import { Link } from 'react-router-dom';
 
 interface State {
      posts:[],
@@ -45,11 +46,14 @@ class Posts extends Component {
           let posts:any = <p style={{textAlign: "center"}}>Something went wrong</p>;
           if (!this.state.error){
                posts = this.state.posts.map((post:any)=>{
-                    return <Post 
-                              key={post.id} 
-                              title={post.title} 
-                              author={post.author}
-                              clicked={() => this.postSelected(post.id)}/>
+                    return (
+                         <Link key={post.id} to={'/'+post.id}>
+                                   <Post 
+                                             title={post.title} 
+                                             author={post.author}
+                                             clicked={() => this.postSelected(post.id)}/>
+                         </Link>
+                    )
                });
           }
      
