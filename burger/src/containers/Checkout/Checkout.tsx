@@ -7,6 +7,7 @@ interface State {
 }
 interface Props {
     history: any;
+    location: any;
 }
 
 class Checkout extends Component<Props> {
@@ -18,6 +19,17 @@ class Checkout extends Component<Props> {
             cheese: 1,
             bacon: 1
         }
+    }
+    componentDidMount() {
+        const query = new URLSearchParams(this.props.location.search);
+        const ingredients = {};
+
+        for (let param of query.entries()){
+            // ['salad', '1']
+            ingredients[param[0]] = +param[1];
+        }
+        this.setState({ingredients: ingredients});
+
     }
 
     checkoutCancelledHandler = () => {

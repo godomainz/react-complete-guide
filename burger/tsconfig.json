@@ -21,7 +21,8 @@
     "noEmit": true,
     "jsx": "react",
     "suppressImplicitAnyIndexErrors": true,
-    "strictNullChecks":false
+    "strictNullChecks":false,
+    "downlevelIteration": true
   },
   "include": [
     "src"
