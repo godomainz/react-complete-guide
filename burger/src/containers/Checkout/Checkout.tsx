@@ -5,8 +5,11 @@ import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSumm
 interface State {
     ingredients: Object;
 }
+interface Props {
+    history: any;
+}
 
-class Checkout extends Component {
+class Checkout extends Component<Props> {
 
     state:State = {
         ingredients: {
@@ -17,11 +20,19 @@ class Checkout extends Component {
         }
     }
 
+    checkoutCancelledHandler = () => {
+        this.props.history.goBack();
+    }
+
+    checkoutContinuedHandler = () => {
+        this.props.history.replace('/checkout/contact-data');
+    }
+
     render(){
  
         return (
               <div>
-                  <CheckoutSummary ingredients={this.state.ingredients}/>
+                  <CheckoutSummary checkoutCancelled={this.checkoutCancelledHandler} checkoutContinued={this.checkoutContinuedHandler} ingredients={this.state.ingredients}/>
               </div> 
         )
     }
