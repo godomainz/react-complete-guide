@@ -23,7 +23,8 @@ const WithErrorHandler = (WrappedComponent:any, axios:AxiosInstance) => {
             axios.interceptors.response.eject(this.responseInterceptor);
         }
 
-        UNSAFE_componentWillMount(){
+        componentWillMount(){
+            console.log("componentWillMount");
             axios.interceptors.request.use((request) =>{
                 this.setState({error: null});
                 return request;
