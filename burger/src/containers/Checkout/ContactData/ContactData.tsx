@@ -84,10 +84,12 @@ interface State{
             elementConfig: {
                 options: {value: string, displayValue: string}[] 
             },
-            value:string
+            value:string,
+            valid: boolean
         };
-        postalCode?: string;
+        
     };
+    formIsValid: boolean;
     loading:boolean;
 
 }
@@ -171,11 +173,12 @@ class ContactData extends Component<Props, State> {
                             {value: 'cheapest', displayValue: 'Cheapest'}
                         ]
                     },
-                    value: ''
-                }
-            
+                    value: '',
+                    valid: true
+                }    
         },
-        loading: false,
+        formIsValid: false,
+        loading: false
     }
 
     orderHandler = (event:any) => {
@@ -232,9 +235,14 @@ class ContactData extends Component<Props, State> {
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value,updatedFormElement.validation)
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
-        console.log(updatedOrderForm[inputIdentifier]);
+        
+        let formIsValid = true;
 
-        this.setState({orderForm: updatedOrderForm});
+        for (let inputIdentifier in updatedOrderForm){
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+        }
+
+        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
     }
 
     render(){
@@ -263,7 +271,7 @@ class ContactData extends Component<Props, State> {
                         </Input>
                     )
                 }
-                <Button btnType="Success">ORDER</Button>
+                <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
         if (this.state.loading){
