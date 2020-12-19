@@ -18,7 +18,11 @@ interface State{
                 type: string;
                 placeholder: string;
             },
-            value:string;
+            value:string,
+            validation?: {
+                required?: boolean
+            },
+            valid: boolean
         };
         street: {
             elementType: string,
@@ -26,7 +30,11 @@ interface State{
                 type: string;
                 placeholder: string;
             },
-            value:string;
+            value:string,
+            validation?: {
+                required?: boolean
+            },
+            valid: boolean
         };
         zipCode?: {
             elementType: string,
@@ -34,7 +42,13 @@ interface State{
                 type: string;
                 placeholder: string;
             },
-            value:string;
+            value:string,
+            validation?: {
+                required?: boolean,
+                minLength?: number,
+                maxLength?: number
+            },
+            valid: boolean
         };
         country?: {
             elementType: string,
@@ -42,7 +56,11 @@ interface State{
                 type: string;
                 placeholder: string;
             },
-            value:string;
+            value:string,
+            validation?: {
+                required?: boolean
+            },
+            valid: boolean
         };
         email: {
             elementType: string,
@@ -50,14 +68,18 @@ interface State{
                 type: string;
                 placeholder: string;
             },
-            value:string;
+            value:string,
+            validation?: {
+                required?: boolean
+            },
+            valid: boolean
         };
         deliveryMethod: {
             elementType: string,
             elementConfig: {
                 options: {value: string, displayValue: string}[] 
             },
-            value:string;
+            value:string
         };
         postalCode?: string;
     };
@@ -75,7 +97,11 @@ class ContactData extends Component<Props, State> {
                         type: 'text',
                         placeholder: 'Your Name'
                     },
-                    value: ''
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false
                 },
                 street: {
                     elementType: 'input',
@@ -83,7 +109,11 @@ class ContactData extends Component<Props, State> {
                         type: 'text',
                         placeholder: 'Street'
                     },
-                    value: ''
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false
                 },
                 zipCode: {
                     elementType: 'input',
@@ -91,7 +121,13 @@ class ContactData extends Component<Props, State> {
                         type: 'text',
                         placeholder: 'ZIP Code'
                     },
-                    value: ''
+                    value: '',
+                    validation: {
+                        required: true,
+                        minLength: 5,
+                        maxLength: 5
+                    },
+                    valid: false
                 },
                 country: {
                     elementType: 'input',
@@ -99,7 +135,11 @@ class ContactData extends Component<Props, State> {
                         type: 'text',
                         placeholder: 'Country'
                     },
-                    value: ''
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false
                 },
                 email: {
                     elementType: 'input',
@@ -107,7 +147,11 @@ class ContactData extends Component<Props, State> {
                         type: 'email',
                         placeholder: 'Your Email'
                     },
-                    value: ''
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false
                 },
                 deliveryMethod: {
                     elementType: 'select',
@@ -152,6 +196,20 @@ class ContactData extends Component<Props, State> {
             });
     }
 
+    checkValidity(value:string, rules:any){
+        let isValid = false;
+        if (rules.required){
+            isValid = value.trim() !== '';
+        }
+        if (rules.minLength){
+            isValid = value.trim().length >= rules.minLength;
+        }
+        if (rules.maxLength){
+            isValid = value.trim().length <= rules.maxLength;
+        }
+        return isValid;
+    }
+
     inputChangedHandler = (event:any,inputIdentifier:string) => {
         const updatedOrderForm = {
             ...this.state.orderForm
@@ -161,8 +219,9 @@ class ContactData extends Component<Props, State> {
         };
 
         updatedFormElement.value = event.target.value;
-
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value,updatedFormElement.validation)
         updatedOrderForm[inputIdentifier] = updatedFormElement;
+        console.log(updatedOrderForm[inputIdentifier]);
 
         this.setState({orderForm: updatedOrderForm});
     }
