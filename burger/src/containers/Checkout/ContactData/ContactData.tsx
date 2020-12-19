@@ -174,7 +174,7 @@ class ContactData extends Component<Props, State> {
                             {value: 'cheapest', displayValue: 'Cheapest'}
                         ]
                     },
-                    value: '',
+                    value: 'fastest',
                     validation: {},
                     valid: true
                 }    
@@ -217,7 +217,7 @@ class ContactData extends Component<Props, State> {
         if(!rules){
             return true;
         }
-        
+
         if (rules.required){
             isValid = value.trim() !== '' && isValid;
         }
