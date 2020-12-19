@@ -127,9 +127,17 @@ class ContactData extends Component<Props, State> {
     orderHandler = (event:any) => {
         event.preventDefault();
         this.setState({loading:true});
+        const formData = {};
+
+        for (let formElementIdentifier in this.state.orderForm ){
+
+            formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
+        }
+
         const order = {
             ingredients: this.props.ingredients,
-            price: this.props.totalPrice
+            price: this.props.totalPrice,
+            orderData: formData
             
         };
         console.log(order)
@@ -170,7 +178,7 @@ class ContactData extends Component<Props, State> {
         }
 
         let form = (
-            <form>
+            <form onSubmit={this.orderHandler}>
                 {
                     formElementsArray.map(formElement => 
                         <Input 
@@ -182,7 +190,7 @@ class ContactData extends Component<Props, State> {
                         </Input>
                     )
                 }
-                <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+                <Button btnType="Success">ORDER</Button>
             </form>
         );
         if (this.state.loading){
