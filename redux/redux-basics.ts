@@ -1,22 +1,46 @@
 import {createStore} from "redux";
+import {incCounter,addCounter,INC_COUNTER, ADD_COUNTER, ActionTypes } from "./actionTypes";
+
+ interface CounterState {
+     counter: number;
+ }
 
 const initialState = { counter:0 }
 
-
 // Reducer
-const rootReducer = (state=initialState,action)=> {
-    if(action.type === "INC_COUNTER"){
+const rootReducer = (state:CounterState=initialState,action:ActionTypes)=> {
+    if(action.type === INC_COUNTER){
         return {
-            ...state, 
+            ...state,
             counter: state.counter + 1
         }
     }
-    if(action.type === "ADD_COUNTER"){
+    if(action.type === ADD_COUNTER){
         return {
             ...state, 
             counter: state.counter + action.value
         }
     }
+
+    // switch (action.type){
+    //     case INC_COUNTER: {
+    //         return {
+    //             ...state,
+    //             counter: state.counter + 1
+    //         }
+    //     }
+    //     case ADD_COUNTER: {
+    //         return {
+    //             ...state,
+    //             counter: state.counter + 10
+    //         }
+    //     }
+    //     default:{
+    //         return {...state};
+    //     }
+            
+    // }
+
     return state;
 };
 
@@ -30,8 +54,9 @@ store.subscribe(()=>{
 })
 
 // Dispatching Action
-store.dispatch({type: "INC_COUNTER"});
+
+store.dispatch(incCounter());
 console.log(store.getState());
-store.dispatch({type: "ADD_COUNTER", value: 10});
+store.dispatch(addCounter());
 console.log(store.getState());
 
