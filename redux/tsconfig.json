@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,7 +23,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "suppressImplicitAnyIndexErrors": true,
+    "strictNullChecks": false,
+    "downlevelIteration": true
   },
   "include": [
     "src"
