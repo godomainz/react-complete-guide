@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux"
+import {connect} from "react-redux";
+import {increment} from "../../store/actionTypes";
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 import CounterState from "../../store/counterState";
 
 interface Props {
     ctr: number;
+    onIncrementCounter: typeof mapDispatchToProps;
 }
 
 class Counter extends Component<Props> {
@@ -34,7 +36,7 @@ class Counter extends Component<Props> {
         return (
             <div>
                 <CounterOutput value={this.props.ctr} />
-                <CounterControl label="Increment" clicked={() => this.counterChangedHandler('inc' )} />
+                <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
                 <CounterControl label="Decrement" clicked={() => this.counterChangedHandler( 'dec' )}  />
                 <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  />
                 <CounterControl label="Subtract 5" clicked={() => this.counterChangedHandler( 'sub', 5 )}  />
@@ -49,4 +51,10 @@ const mapStateToProps = (state:CounterState) => {
     }
 }
 
-export default connect(mapStateToProps)(Counter);
+const mapDispatchToProps = (dispatch:any) => {
+    return {
+        onIncrementCounter: () => dispatch(increment())
+    };
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Counter);
