@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import {increment} from "../../store/actionTypes";
+import {decrement, increment,add,substract} from "../../store/actionTypes";
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 import CounterState from "../../store/counterState";
 
+// type Props = CounterState & typeof mapStateToProps & typeof mapDispatchToProps;
 interface Props {
     ctr: number;
     onIncrementCounter: typeof mapDispatchToProps;
+    onDecrementCounter: typeof mapDispatchToProps;
+    onAddCounter: typeof mapDispatchToProps;
+    onSubstractCounter:  typeof mapDispatchToProps;
 }
 
 class Counter extends Component<Props> {
@@ -37,9 +41,9 @@ class Counter extends Component<Props> {
             <div>
                 <CounterOutput value={this.props.ctr} />
                 <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
-                <CounterControl label="Decrement" clicked={() => this.counterChangedHandler( 'dec' )}  />
-                <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  />
-                <CounterControl label="Subtract 5" clicked={() => this.counterChangedHandler( 'sub', 5 )}  />
+                <CounterControl label="Decrement" clicked={this.props.onDecrementCounter}  />
+                <CounterControl label="Add 5" clicked={this.props.onAddCounter}  />
+                <CounterControl label="Subtract 5" clicked={this.props.onSubstractCounter}  />
             </div>
         );
     }
@@ -53,7 +57,10 @@ const mapStateToProps = (state:CounterState) => {
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        onIncrementCounter: () => dispatch(increment())
+        onIncrementCounter: () => dispatch(increment()),
+        onDecrementCounter : () => dispatch(decrement()),
+        onAddCounter : () => dispatch(add()),
+        onSubstractCounter : () => dispatch(substract()),
     };
 }
 
