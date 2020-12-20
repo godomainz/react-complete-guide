@@ -2,11 +2,15 @@ export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
 export const ADD = "ADD";
 export const SUBSTRACT = "SUBSTRACT";
+export const STORE_RESULT = "STORE_RESULT";
+export const DELETE_RESULT = "DELETE_RESULT";
 
 export type IncrementAction = {type: typeof INCREMENT}
 export type DecrementAction = {type: typeof DECREMENT}
 export type AddAction = {type: typeof ADD, val:number}
 export type SubstractAction = {type: typeof SUBSTRACT, val: number}
+export type StoreResultAction = {type: typeof STORE_RESULT}
+export type DeleteResultAction = {type: typeof DELETE_RESULT}
 
 export const increment = ():IncrementAction => ({
     type: INCREMENT
@@ -26,4 +30,12 @@ export const substract = ():SubstractAction => ({
     val: 15
 });
 
-export type ActionTypes = IncrementAction | DecrementAction | AddAction | SubstractAction;
+export const storeResult = ():StoreResultAction => ({
+    type: STORE_RESULT
+});
+
+export const deleteResult = ():DeleteResultAction => ({
+    type: DELETE_RESULT
+});
+
+export type ActionTypes = IncrementAction | DecrementAction | AddAction | SubstractAction | StoreResultAction | DeleteResultAction;

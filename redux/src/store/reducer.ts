@@ -1,32 +1,39 @@
 import CounterState from "./counterState";
-import {ActionTypes,INCREMENT,DECREMENT,ADD,SUBSTRACT} from "./actionTypes"
+import {ActionTypes,INCREMENT,DECREMENT,ADD,SUBSTRACT,STORE_RESULT,DELETE_RESULT} from "./actionTypes"
 
 const initialState: CounterState = {
-    counter: 0
+    counter: 0,
+    results : []
 }
 
 const reducer = (state:CounterState=initialState, action:ActionTypes) => {
     switch (action.type){
         case INCREMENT:
-            return {
-                counter: state.counter + 1
-            }
+            const newState = Object.assign({}, state);
+            newState.counter = state.counter + 1;
+            return newState;
         case DECREMENT:
             return {
+                ...state,
                 counter: state.counter - 1
             }
         case ADD:
             return {
+                ...state,
                 counter: state.counter + action.val
             }
         case SUBSTRACT:
             return {
+                ...state,
                 counter: state.counter - action.val
             }
-        default:
+        case STORE_RESULT:
             return {
-                counter: 0
+                ...state,
+                results: state.results.concat({id: new Date(),value: state.counter})
             }
+        default:
+            return state
     }
 }
 
