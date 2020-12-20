@@ -1,7 +1,4 @@
-
- interface CounterState {
-    counter: number;
-}
+import CounterState from "./counterState";
 const initialState: CounterState = {
     counter: 0
 }
