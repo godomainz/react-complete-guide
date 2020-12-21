@@ -9,7 +9,7 @@ export type IncrementAction = {type: typeof INCREMENT}
 export type DecrementAction = {type: typeof DECREMENT}
 export type AddAction = {type: typeof ADD, val:number}
 export type SubstractAction = {type: typeof SUBSTRACT, val: number}
-export type StoreResultAction = {type: typeof STORE_RESULT}
+export type StoreResultAction = {type: typeof STORE_RESULT,result:number}
 export type DeleteResultAction = {type: typeof DELETE_RESULT, resultElId: number}
 
 export const increment = ():IncrementAction => ({
@@ -30,8 +30,9 @@ export const substract = ():SubstractAction => ({
     val: 15
 });
 
-export const storeResult = ():StoreResultAction => ({
-    type: STORE_RESULT
+export const storeResult = (result:number):StoreResultAction => ({
+    type: STORE_RESULT,
+    result: result
 });
 
 export const deleteResult = (id:number):DeleteResultAction => ({

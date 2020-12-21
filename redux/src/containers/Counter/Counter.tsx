@@ -18,10 +18,6 @@ interface Props {
 }
 
 class Counter extends Component<Props> {
-    state:CounterState = {
-        counter: 0,
-        results: []
-    }
 
     counterChangedHandler = ( action:any, value?:any ) => {
         switch ( action ) {
@@ -49,7 +45,7 @@ class Counter extends Component<Props> {
                 <CounterControl label="Add 10" clicked={this.props.onAddCounter}  />
                 <CounterControl label="Subtract 15" clicked={this.props.onSubstractCounter}  />
                 <hr/>
-                <button onClick={this.props.onStoreResult}>Store Result</button>
+                <button onClick={()=>this.props.onStoreResult(this.props.ctr)}>Store Result</button>
                 <ul>
                     {this.props.storedResults.map((strResult:any) => {
                         return <li key={strResult.id} onClick={() => this.props.onDeleteResult(strResult.id)}>{strResult.value}</li>
@@ -63,8 +59,8 @@ class Counter extends Component<Props> {
 
 const mapStateToProps = (state:CounterState) => {
     return {
-        ctr: state.counter,
-        storedResults: state.results
+        ctr: state["ctr"].counter,
+        storedResults: state["res"].results
     }
 }
 
@@ -74,7 +70,7 @@ const mapDispatchToProps = (dispatch:any) => {
         onDecrementCounter : () => dispatch(actionTypes.decrement()),
         onAddCounter : () => dispatch(actionTypes.add()),
         onSubstractCounter : () => dispatch(actionTypes.substract()),
-        onStoreResult: () => dispatch(actionTypes.storeResult()),
+        onStoreResult: (result:number) => dispatch(actionTypes.storeResult(result)),
         onDeleteResult: (id:number) => dispatch(actionTypes.deleteResult(id)),
     };
 }
