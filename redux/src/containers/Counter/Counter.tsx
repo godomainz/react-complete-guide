@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import * as actionTypes from "../../store/actionTypes";
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
-import CounterState from "../../store/counterState";
+import CounterState from "../../store/states/counterState";
 
 // type Props = CounterState & typeof mapStateToProps & typeof mapDispatchToProps;
 interface Props {

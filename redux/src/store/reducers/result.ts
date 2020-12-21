@@ -1,4 +1,4 @@
-import ResultState from "../resultState";
+import ResultState from "../states/resultState";
 import * as actionTypes from "../actionTypes"
 
 const initialState: ResultState = {
