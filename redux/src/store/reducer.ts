@@ -1,38 +1,38 @@
 import CounterState from "./counterState";
-import {ActionTypes, INCREMENT, DECREMENT, ADD, SUBSTRACT, STORE_RESULT, DELETE_RESULT} from "./actionTypes"
+import * as actionTypes from "./actionTypes"
 
 const initialState: CounterState = {
     counter: 0,
     results : []
 }
 
-const reducer = (state:CounterState=initialState, action:ActionTypes) => {
+const reducer = (state:CounterState=initialState, action:actionTypes.ActionTypes) => {
     switch (action.type){
-        case INCREMENT:
+        case actionTypes.INCREMENT:
             const newState = Object.assign({}, state);
             newState.counter = state.counter + 1;
             return newState;
-        case DECREMENT:
+        case actionTypes.DECREMENT:
             return {
                 ...state,
                 counter: state.counter - 1
             }
-        case ADD:
+        case actionTypes.ADD:
             return {
                 ...state,
                 counter: state.counter + action.val
             }
-        case SUBSTRACT:
+        case actionTypes.SUBSTRACT:
             return {
                 ...state,
                 counter: state.counter - action.val
             }
-        case STORE_RESULT:
+        case actionTypes.STORE_RESULT:
             return {
                 ...state,
                 results: state.results.concat({id: new Date(),value: state.counter})
             }
-        case DELETE_RESULT:
+        case actionTypes.DELETE_RESULT:
             // const id = 2;
             // const newArray = [...state.results];
             // newArray.splice(id, 1);
