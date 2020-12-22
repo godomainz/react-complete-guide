@@ -1,4 +1,4 @@
 export default interface IngredientState {
-    ingredients: Array<any>;
+    ingredients: {salad:number,bacon:number,cheese:number,meat:number};
     totalPrice:number;
 }

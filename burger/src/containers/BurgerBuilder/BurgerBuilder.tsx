@@ -39,12 +39,12 @@ class BurgerBuilder extends Component<Props> {
 
   componentDidMount(){
     console.log(this.props);
-    axios.get('ingredients.json').then(response=>{
-      this.setState({ingredients: response.data});
-    }).catch(error=> {
-      console.error(error);
-      this.setState({error: true})
-    });
+    // axios.get('ingredients.json').then(response=>{
+    //   this.setState({ingredients: response.data});
+    // }).catch(error=> {
+    //   console.error(error);
+    //   this.setState({error: true})
+    // });
   }
 
   updatePurchaseState(updatedIngredients:any) {
