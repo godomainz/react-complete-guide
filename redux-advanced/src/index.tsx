@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {createStore,combineReducers} from "redux";
+import {createStore, combineReducers, applyMiddleware } from "redux";
 import {Provider} from "react-redux";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,7 +13,18 @@ const rootReducer = combineReducers({
   res: resultReducer
 });
 
-const store = createStore(rootReducer);
+const logger = (store:any) => {
+  return (next:any) => {
+    return (action:any) => {
+      console.log("[Middleware] Dispatching ", action);
+      const result = next(action);
+      console.log("[Middleware] next state ",store.getState());
+      return result;
+    }
+  }
+}
+
+const store = createStore(rootReducer,applyMiddleware(logger));
 
 ReactDOM.render(
   <React.StrictMode>
