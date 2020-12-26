@@ -20,14 +20,14 @@ export const decrement = ():DecrementAction => ({
     type: DECREMENT
 });
 
-export const add = ():AddAction => ({
+export const add = (value:number):AddAction => ({
     type: ADD,
-    val: 10
+    val: value
 });
 
-export const substract = ():SubstractAction => ({
+export const substract = (value:number):SubstractAction => ({
     type: SUBSTRACT,
-    val: 15
+    val: value
 });
 
 export const storeResult = (result:number):StoreResultAction => ({

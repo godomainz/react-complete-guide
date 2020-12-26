@@ -1,5 +1,5 @@
 import ResultState from "../states/resultState";
-import * as actionTypes from "../actionTypes"
+import * as actionTypes from "../actions/actionTypes"
 
 const initialState: ResultState = {
     results : []
