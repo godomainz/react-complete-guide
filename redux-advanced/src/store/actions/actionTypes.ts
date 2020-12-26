@@ -30,10 +30,19 @@ export const substract = (value:number):SubstractAction => ({
     val: value
 });
 
-export const storeResult = (result:number):StoreResultAction => ({
-    type: STORE_RESULT,
-    result: result
-});
+export const saveResult = (result:number):StoreResultAction => {
+    return {
+        type: STORE_RESULT,
+        result: result
+    }
+}
+export const storeResult = (result:number) => {
+    return (dispatch:any) => {
+        setTimeout(() => {
+            dispatch(saveResult(result));
+        },5000);
+    }
+};
 
 export const deleteResult = (id:number):DeleteResultAction => ({
     type: DELETE_RESULT,
