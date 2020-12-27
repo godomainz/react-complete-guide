@@ -7,8 +7,10 @@ export const saveResult = (result:number):actionTypes.StoreResultAction => {
     }
 }
 export const storeResult = (result:number) => {
-    return (dispatch:any) => {
+    return (dispatch:any,getState:()=>any) => {
         setTimeout(() => {
+            // const oldCounter = getState().ctr.counter;
+            // console.log("oldCounter ",oldCounter);
             dispatch(saveResult(result));
         },5000);
     }
