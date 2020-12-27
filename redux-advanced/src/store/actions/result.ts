@@ -12,7 +12,7 @@ export const storeResult = (result:number) => {
             // const oldCounter = getState().ctr.counter;
             // console.log("oldCounter ",oldCounter);
             dispatch(saveResult(result));
-        },5000);
+        },2000);
     }
 };
 
