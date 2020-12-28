@@ -6,9 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import reducer from "./stroe/reducer"
-import { createStore } from "redux";
+import { createStore, compose } from "redux";
 
-const store = createStore(reducer);
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__?: typeof compose;
+  }
+}
+
+
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const app:any = (
     <Provider store={store}>
