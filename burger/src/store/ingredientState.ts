@@ -1,5 +1,6 @@
+import { Ingredients } from "./ingredients";
 export default interface IngredientState {
-    ingredients: {salad:number,bacon:number,cheese:number,meat:number};
+    ingredients: Ingredients;
     totalPrice:number;
     error: boolean
 }
