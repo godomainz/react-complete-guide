@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import reducer from "./stroe/reducer"
+import reducer from "./store/reducer"
 import { createStore, compose } from "redux";
 
 declare global {
