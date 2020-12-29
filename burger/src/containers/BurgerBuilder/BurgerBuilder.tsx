@@ -12,9 +12,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import WithErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 interface State {
-  purchasing:boolean,
-  loading:boolean,
-  error:boolean
+  purchasing:boolean
 }
 interface Props {
   history: any,
@@ -26,19 +24,11 @@ interface Props {
 
 class BurgerBuilder extends Component<Props> {
   state: State = {
-    purchasing: false,
-    loading: false,
-    error:false
+    purchasing: false
   }
 
   componentDidMount(){
     console.log(this.props);
-    // axios.get('ingredients.json').then(response=>{
-    //   this.setState({ingredients: response.data});
-    // }).catch(error=> {
-    //   console.error(error);
-    //   this.setState({error: true})
-    // });
   }
 
   updatePurchaseState(updatedIngredients:any) {
@@ -98,10 +88,6 @@ class BurgerBuilder extends Component<Props> {
         purchaseContinued={this.purchaseContinueHandler}
         price={this.props.totalPrice}/> ;
 
-    }
-
-    if(this.state.loading){
-      orderSummary = <Spinner/>;
     }
 
     return (
