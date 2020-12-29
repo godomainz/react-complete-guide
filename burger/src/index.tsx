@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import reducer from "./store/reducers/burgerBuilder"
+import burgerbuilderReducer from "./store/reducers/burgerBuilder"
 import { createStore, compose } from "redux";
 
 declare global {
@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(burgerbuilderReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const app:any = (
     <Provider store={store}>
