@@ -18,8 +18,10 @@ interface Props {
   history: any,
   onIngredientAdded:any,
   onIngredientRemoved:any,
+  onInitIngredients:any,
   ings:any,
-  totalPrice:number
+  totalPrice:number,
+  error:boolean
 }
 
 class BurgerBuilder extends Component<Props> {
@@ -29,6 +31,7 @@ class BurgerBuilder extends Component<Props> {
 
   componentDidMount(){
     console.log(this.props);
+    this.props.onInitIngredients();
   }
 
   updatePurchaseState(updatedIngredients:any) {
@@ -65,7 +68,7 @@ class BurgerBuilder extends Component<Props> {
     }
 
     let orderSummary = null;
-    let burger = this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner/>;
+    let burger = this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner/>;
     
     if(this.props.ings){
       console.log(this.props)
@@ -104,14 +107,16 @@ class BurgerBuilder extends Component<Props> {
 const mapStateToProps = (state:any) => {
   return {
       ings: state.ingredients,
-      totalPrice: state.totalPrice
+      totalPrice: state.totalPrice,
+      error : state.error
   }
 }
 
 const mapDispatchToProps = (dispatch:any) => {
   return {
       onIngredientAdded: (ingName:string) => dispatch(burgerBuilderActions.addIngredient(ingName)),
-      onIngredientRemoved : (ingName:string) => dispatch(burgerBuilderActions.removeIngredient(ingName))
+      onIngredientRemoved : (ingName:string) => dispatch(burgerBuilderActions.removeIngredient(ingName)),
+      onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients()) 
   };
 }
 

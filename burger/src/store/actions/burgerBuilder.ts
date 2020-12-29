@@ -19,10 +19,9 @@ export const fetchIngredientsFailed = ():actionTypes.FetchIngredientsFailedActio
     type: actionTypes.FETCH_INGREDIENTS_FAILED
 });
 
-export const initIngredient = () => {
+export const initIngredients = () => {
     return (dispatch:(func:any)=>void) => {
         axios.get('ingredients.json').then(response=>{
-            console.log(response.data);
             dispatch(setIngredients(response.data));
         }).catch(error=> {
             console.error(error);
