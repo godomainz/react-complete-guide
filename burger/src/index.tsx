@@ -5,8 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import burgerbuilderReducer from "./store/reducers/burgerBuilder"
-import { createStore, compose, applyMiddleware } from "redux";
+import burgerbuilderReducer from "./store/reducers/burgerBuilder";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+import orderReducer from "./store/reducers/order";
 import thunk from "redux-thunk";
 
 declare global {
@@ -16,7 +17,12 @@ declare global {
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(burgerbuilderReducer, composeEnhancers(applyMiddleware(thunk)));
+const rootReducer = combineReducers({
+  burgerBuilder: burgerbuilderReducer,
+  order: orderReducer
+});
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 const app:any = (
     <Provider store={store}>
