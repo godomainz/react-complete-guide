@@ -13,21 +13,20 @@ interface Props {
     ings:any;
     price:number;
     history: any;
+    loading: boolean;
     onOrderBurger:(orderData:any)=>any;
 }
 
 interface State{
     orderForm: OrderForm;
     formIsValid: boolean;
-    loading:boolean;
 }
 
 class ContactData extends Component<Props, State> {
 
     state:State = {
         orderForm: OrderFormModel,
-        formIsValid: false,
-        loading: false
+        formIsValid: false
     }
 
     orderHandler = (event:any) => {
@@ -115,7 +114,7 @@ class ContactData extends Component<Props, State> {
                 <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
-        if (this.state.loading){
+        if (this.props.loading){
             form = <Spinner />;
         }
 
@@ -131,13 +130,14 @@ class ContactData extends Component<Props, State> {
 const mapStateToProps = (state:any) => {
     return {
         ings: state.ingredients,
-        price: state.totalPrice
+        price: state.totalPrice,
+        loading: state.loading
     }
 }
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        onOrderBurger: (orderData:any) => dispatch(actions.purchaseBurgerStart(orderData))
+        onOrderBurger: (orderData:any) => dispatch(actions.purchaseBurger(orderData))
     };
   }
 
