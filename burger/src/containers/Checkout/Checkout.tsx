@@ -3,13 +3,14 @@ import {connect} from 'react-redux';
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import { Route, Redirect } from "react-router-dom";
 import ContactData from "./ContactData/ContactData";
-
+import * as actions from "../../store/actions";
 
 interface Props {
     history: any;
     location: any;
     match: any;
     ings: any;
+    purchased: boolean;
 }
 
 class Checkout extends Component<Props> {
@@ -23,14 +24,17 @@ class Checkout extends Component<Props> {
     }
 
     render(){
-        let summary = <Redirect to="/"/>
+        let summary = <Redirect to="/"/>;
         if(this.props.ings){
+            const purchasedRedirect = this.props.purchased ? <Redirect to="/"/> : null;
+
             summary = (
                 <div>
+                    {purchasedRedirect}
                     <CheckoutSummary checkoutCancelled={this.checkoutCancelledHandler} checkoutContinued={this.checkoutContinuedHandler} ingredients={this.props.ings}/>
                     <Route path={this.props.match.path + '/contact-data'} component={ContactData}/>
                 </div>
-            )
+            );
         }
         return summary;
     }
@@ -39,7 +43,8 @@ class Checkout extends Component<Props> {
 
 const mapStateToProps = (state:any) => {
     return {
-        ings: state.burgerBuilder.ingredients
+        ings: state.burgerBuilder.ingredients,
+        purchased: state.order.purchased
     }
 }
 
