@@ -32,7 +32,6 @@ const app:any = (
         </BrowserRouter>
       </React.StrictMode>
     </Provider>
- 
 );
 
 ReactDOM.render(app, document.getElementById('root'));
