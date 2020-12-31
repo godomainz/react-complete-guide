@@ -45,6 +45,7 @@ const reducer = (state:IngredientState=initialState, action:actionTypes.ActionTy
                 //     meat: action.ingredients.meat,
                 // },
                 ingredients: action.ingredients,
+                totalPrice: initialState.totalPrice,
                 error: false
             }
         case actionTypes.FETCH_INGREDIENTS_FAILED:
