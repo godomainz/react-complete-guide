@@ -13,6 +13,10 @@ export const FETCH_ORDERS_START = "FETCH_ORDERS_START";
 export const FETCH_ORDERS_SUCCESS = "FETCH_ORDERS_SUCCESS";
 export const FETCH_ORDERS_FAIL = "FETCH_ORDERS_FAIL";
 
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+
 export type AddIngredientAction = {type: typeof ADD_INGREDIENT, ingredientName:string};
 export type RemoveIngredientAction = {type: typeof REMOVE_INGREDIENT, ingredientName:string};
 export type SetIngredientsAction = {type: typeof SET_INGREDIENTS, ingredients:Ingredients};
@@ -27,6 +31,10 @@ export type FetchOrdersStartAction = {type: typeof FETCH_ORDERS_START}
 export type FetchOrdersSuccessAction = {type: typeof FETCH_ORDERS_SUCCESS, orders:any}
 export type FetchOrdersFailAction = {type: typeof FETCH_ORDERS_FAIL, error:string}
 
+export type AuthStartAction = {type: typeof AUTH_START}
+export type AuthSuccessAction = {type: typeof AUTH_SUCCESS, authData: any}
+export type AuthFailAction = {type: typeof AUTH_FAIL, error:string}
+
 export type ActionTypes = AddIngredientAction | RemoveIngredientAction | SetIngredientsAction | FetchIngredientsFailedAction | 
                             PurchaseBurgerStartAction | PurchaseBurgerSuccessAction | PurchaseBurgerFailAction | PurchaseInitAction | FetchOrdersStartAction |
-                            FetchOrdersSuccessAction | FetchOrdersFailAction;
+                            FetchOrdersSuccessAction | FetchOrdersFailAction| AuthStartAction | AuthSuccessAction | AuthFailAction ;
