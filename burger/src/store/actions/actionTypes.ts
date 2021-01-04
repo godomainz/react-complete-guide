@@ -32,7 +32,7 @@ export type FetchOrdersSuccessAction = {type: typeof FETCH_ORDERS_SUCCESS, order
 export type FetchOrdersFailAction = {type: typeof FETCH_ORDERS_FAIL, error:string}
 
 export type AuthStartAction = {type: typeof AUTH_START}
-export type AuthSuccessAction = {type: typeof AUTH_SUCCESS, authData: any}
+export type AuthSuccessAction = {type: typeof AUTH_SUCCESS, idToken:string, userId: string, error: any, loading:boolean}
 export type AuthFailAction = {type: typeof AUTH_FAIL, error:string}
 
 export type ActionTypes = AddIngredientAction | RemoveIngredientAction | SetIngredientsAction | FetchIngredientsFailedAction | 

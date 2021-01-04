@@ -7,10 +7,13 @@ export const authStart = (): actionTypes.AuthStartAction => {
     }
 }
 
-export const authSuccess = (authData:any): actionTypes.AuthSuccessAction => {
+export const authSuccess = (token:string, userId:string, error:any, loading:boolean ): actionTypes.AuthSuccessAction => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        authData: authData
+        idToken: token,
+        userId: userId,
+        error:error,
+        loading: loading
     }
 }
 
@@ -38,7 +41,7 @@ export const auth = (email: string, password: string, isSignup: boolean=true)=> 
         const url = `${urlWithoutKey}${apikey}`;
         axios.post(url, authData).then(response => {
             console.log(response);
-            dispatch(authSuccess(response.data));
+            dispatch(authSuccess(response.data.idToken, response.data.localId, null, false));
         }).catch(err=>{
             console.log(err);
             dispatch(authFail(err));
