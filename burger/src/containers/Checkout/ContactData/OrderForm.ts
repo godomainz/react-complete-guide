@@ -1,80 +1,12 @@
+import { InputType } from "../../../components/UI/ElementTypes/InputType";
+import { DropDownType } from "../../../components/UI/ElementTypes/DropDownType"
 export type OrderForm = {
-        name: {
-            elementType: string,
-            elementConfig: {
-                type: string;
-                placeholder: string;
-            },
-            value:string,
-            validation?: {
-                required?: boolean
-            },
-            valid: boolean,
-            touched: boolean
-        };
-        street: {
-            elementType: string,
-            elementConfig: {
-                type: string;
-                placeholder: string;
-            },
-            value:string,
-            validation?: {
-                required?: boolean
-            },
-            valid: boolean,
-            touched: boolean
-        };
-        zipCode?: {
-            elementType: string,
-            elementConfig: {
-                type: string;
-                placeholder: string;
-            },
-            value:string,
-            validation?: {
-                required?: boolean,
-                minLength?: number,
-                maxLength?: number
-            },
-            valid: boolean,
-            touched: boolean
-        };
-        country?: {
-            elementType: string,
-            elementConfig: {
-                type: string;
-                placeholder: string;
-            },
-            value:string,
-            validation?: {
-                required?: boolean
-            },
-            valid: boolean,
-            touched: boolean
-        };
-        email: {
-            elementType: string,
-            elementConfig: {
-                type: string;
-                placeholder: string;
-            },
-            value:string,
-            validation?: {
-                required?: boolean
-            },
-            valid: boolean,
-            touched: boolean
-        };
-        deliveryMethod: {
-            elementType: string,
-            elementConfig: {
-                options: {value: string, displayValue: string}[] 
-            },
-            value:string,
-            validation?: {}
-            valid: boolean
-        };
+        name: InputType;
+        street: InputType;
+        zipCode?: InputType;
+        country?: InputType;
+        email: InputType;
+        deliveryMethod: DropDownType;
 }
 
 export const OrderFormModel:OrderForm = {
