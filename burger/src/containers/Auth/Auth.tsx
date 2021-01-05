@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { InputType } from "../../components/UI/ElementTypes/InputType";
 import  Input  from "../../components/UI/Input/Input";
 import  Button  from "../../components/UI/Button/Button";
@@ -11,6 +12,7 @@ interface Props {
     onAuth:(email:string, password:string, isSignUp:boolean) =>void;
     loading: boolean;
     error: any;
+    isAuthenticated: boolean;
 }
 
 interface State {
@@ -125,6 +127,10 @@ class Auth extends Component<Props,State> {
                 config: this.state.controls[key]
             });
         }
+        let authRedirect = null;
+        if(this.props.isAuthenticated){
+            authRedirect = <Redirect to="/" />;
+        }
 
         let form:JSX.Element[]|JSX.Element= formElementsArray.map((formElement)=>{
             console.log("formElement.config.valid : " + formElement.config.valid);
@@ -155,6 +161,7 @@ class Auth extends Component<Props,State> {
         return (
             
             <div className={classes.Auth}>
+                {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
@@ -170,7 +177,8 @@ class Auth extends Component<Props,State> {
 const mapStateToProps = (state:any) => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null
     }
 }
 const mapDispatchToProps = (dispatch:any) => {
