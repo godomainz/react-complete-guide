@@ -14,7 +14,8 @@ interface Props {
     price:number;
     history: any;
     loading: boolean;
-    onOrderBurger:(orderData:any)=>any;
+    onOrderBurger:(orderData:any, token:string)=>any;
+    token:string;
 }
 
 interface State{
@@ -42,8 +43,7 @@ class ContactData extends Component<Props, State> {
             orderData: formData
             
         };
-        console.log(order)
-        this.props.onOrderBurger(order)
+        this.props.onOrderBurger(order, this.props.token);
     }
 
     checkValidity(value:string, rules:any){
@@ -143,13 +143,14 @@ const mapStateToProps = (state:any) => {
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token
     }
 }
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        onOrderBurger: (orderData:any) => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger: (orderData:any, token: string) => dispatch(actions.purchaseBurger(orderData,token))
     };
   }
 
