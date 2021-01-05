@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
+import { getError } from "../firebaseErrors/errors";
 
 export const authStart = (): actionTypes.AuthStartAction => {
     return {
@@ -43,8 +44,10 @@ export const auth = (email: string, password: string, isSignup: boolean=true)=> 
             console.log(response);
             dispatch(authSuccess(response.data.idToken, response.data.localId, null, false));
         }).catch(err=>{
-            console.log(err);
-            dispatch(authFail(err));
+            const error = err.response.data.error ;
+            const errorMessage = getError(error.message);
+            const updatedError = {...error, message:errorMessage};
+            dispatch(authFail(updatedError));
         });
     }
 }
