@@ -66,3 +66,10 @@ export const auth = (email: string, password: string, isSignup: boolean=true)=> 
         });
     }
 }
+
+export const setAuthRedirectPath = (path:string): actionTypes.SetAuthRedirectPathAction =>{
+    return {
+        type: actionTypes.SET_AUTH_REDIRECT_PATH,
+        path: path
+    }
+}

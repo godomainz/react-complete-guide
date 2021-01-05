@@ -23,7 +23,8 @@ interface Props {
   totalPrice:number,
   error:boolean,
   isAuthenticated:boolean,
-  onInitPurchase:()=>void
+  onInitPurchase:()=>void,
+  onSetAuthRedirectPath:(path:string)=>void
 }
 
 class BurgerBuilder extends Component<Props> {
@@ -50,9 +51,12 @@ class BurgerBuilder extends Component<Props> {
   }
 
   purchaseHandler = () => {
+    console.log("this.props.isAuthenticated "+this.props.isAuthenticated);
     if (this.props.isAuthenticated){
       this.setState({purchasing: true});
     } else {
+      console.log("BurgerBiuilder purchaseHandler onSetAuthRedirectPath")
+      this.props.onSetAuthRedirectPath("/checkout");
       this.props.history.push("/auth");
     }
     
@@ -127,7 +131,8 @@ const mapDispatchToProps = (dispatch:any) => {
       onIngredientAdded: (ingName:string) => dispatch(actions.addIngredient(ingName)),
       onIngredientRemoved : (ingName:string) => dispatch(actions.removeIngredient(ingName)),
       onInitIngredients: () => dispatch(actions.initIngredients()),
-      onInitPurchase: () => dispatch(actions.purchaseInit())
+      onInitPurchase: () => dispatch(actions.purchaseInit()),
+      onSetAuthRedirectPath: (path:string) => dispatch(actions.setAuthRedirectPath(path))
   };
 }
 

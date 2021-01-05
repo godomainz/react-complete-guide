@@ -13,6 +13,9 @@ interface Props {
     loading: boolean;
     error: any;
     isAuthenticated: boolean;
+    buildingBurger: boolean;
+    authRedirectPath: string;
+    onSetAuthRedirectPath: (path?:string) => void;
 }
 
 interface State {
@@ -59,6 +62,13 @@ class Auth extends Component<Props,State> {
         isSignUp: true
     }
 
+    componentDidMount() {
+        if(this.props.buildingBurger && this.props.authRedirectPath !== "/"){
+            console.log("Auth.tsx componentDidMount onSetAuthRedirectPath")
+            this.props.onSetAuthRedirectPath(this.props.authRedirectPath);
+        }
+        console.log("Auth this.props.authRedirectPath "+ this.props.authRedirectPath);
+    }
 
     checkValidity(value:string, rules:any){
         let isValid = true;
@@ -128,8 +138,9 @@ class Auth extends Component<Props,State> {
             });
         }
         let authRedirect = null;
+        console.log("Auth Render " + this.props.authRedirectPath+" "+this.props.isAuthenticated);
         if(this.props.isAuthenticated){
-            authRedirect = <Redirect to="/" />;
+            authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
 
         let form:JSX.Element[]|JSX.Element= formElementsArray.map((formElement)=>{
@@ -178,12 +189,15 @@ const mapStateToProps = (state:any) => {
     return {
         loading: state.auth.loading,
         error: state.auth.error,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        buildingBurger: state.burgerBuilder.building,
+        authRedirectPath: state.auth.authRedirectPath
     }
 }
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        onAuth: (email:string, password:string, isSignup:boolean) => dispatch(actions.auth(email, password,isSignup))
+        onAuth: (email:string, password:string, isSignup:boolean) => dispatch(actions.auth(email, password,isSignup)),
+        onSetAuthRedirectPath: (path:string) => dispatch(actions.setAuthRedirectPath(path))
     };
   }
 

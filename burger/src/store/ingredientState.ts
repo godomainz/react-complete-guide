@@ -2,5 +2,6 @@ import { Ingredients } from "./ingredients";
 export default interface IngredientState {
     ingredients: Ingredients;
     totalPrice:number;
-    error: boolean
+    error: boolean;
+    building: boolean;
 }

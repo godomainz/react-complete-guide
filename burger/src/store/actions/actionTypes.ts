@@ -18,6 +18,8 @@ export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
+export const SET_AUTH_REDIRECT_PATH = "SET_AUTH_REDIRECT_PATH";
+
 export type AddIngredientAction = {type: typeof ADD_INGREDIENT, ingredientName:string};
 export type RemoveIngredientAction = {type: typeof REMOVE_INGREDIENT, ingredientName:string};
 export type SetIngredientsAction = {type: typeof SET_INGREDIENTS, ingredients:Ingredients};
@@ -37,6 +39,9 @@ export type AuthSuccessAction = {type: typeof AUTH_SUCCESS, idToken:string, user
 export type AuthFailAction = {type: typeof AUTH_FAIL, error:string}
 export type AuthLogoutAction = {type: typeof AUTH_LOGOUT}
 
+export type SetAuthRedirectPathAction = {type: typeof SET_AUTH_REDIRECT_PATH, path: string}
+
 export type ActionTypes = AddIngredientAction | RemoveIngredientAction | SetIngredientsAction | FetchIngredientsFailedAction | 
                             PurchaseBurgerStartAction | PurchaseBurgerSuccessAction | PurchaseBurgerFailAction | PurchaseInitAction | FetchOrdersStartAction |
-                            FetchOrdersSuccessAction | FetchOrdersFailAction| AuthStartAction | AuthSuccessAction | AuthFailAction | AuthLogoutAction ;
+                            FetchOrdersSuccessAction | FetchOrdersFailAction| AuthStartAction | AuthSuccessAction | AuthFailAction | AuthLogoutAction |
+                            SetAuthRedirectPathAction ;
