@@ -7,16 +7,17 @@ import { connect } from 'react-redux';
 import Spinner from "../../../components/UI/Spinner/Spinner";
 
 interface Props {
-    onfetchOrders:(token:string) => void;
+    onfetchOrders:(token:string,userId:string) => void;
     orders: any;
     loading: boolean;
     token: string;
+    userId:string;
 }
 
 class Orders extends Component<Props> {
  
     componentDidMount() {
-        this.props.onfetchOrders(this.props.token);
+        this.props.onfetchOrders(this.props.token, this.props.userId);
     }
 
     render(){
@@ -40,13 +41,14 @@ const mapStateToProps = (state:any) => {
     return {
         loading: state.order.loading,
         orders: state.order.orders,
-        token: state.auth.token
+        token: state.auth.token,
+        userId: state.auth.userId
     }
 }
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        onfetchOrders: (token:string) => dispatch(actions.fetchOrders(token))
+        onfetchOrders: (token:string, userId:string) => dispatch(actions.fetchOrders(token, userId))
     };
 }
 
