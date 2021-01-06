@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-
 import Card from '../UI/Card';
 import classes from './IngredientForm.module.css';
 
 interface IState {
-  title?: string;
-  amount?: string;
+  title: string;
+  amount: string;
 }
 
 const IngredientForm = React.memo(props => {
@@ -27,11 +26,19 @@ const IngredientForm = React.memo(props => {
         <form onSubmit={submitHandler}>
           <div className={classes.FormControl}>
             <label htmlFor="title">Name</label>
-            <input type="text" id="title" value={inputState[0].title} onChange={event=> inputState[1]({title:event.target.value})}/>
+            <input type="text" id="title" value={inputState[0].title} onChange={event=> {
+                const newTitle = event.target.value;
+                inputState[1]((prevInputState)=>({ title: newTitle, amount: prevInputState.amount }))
+              }
+            }/>
           </div>
           <div className={classes.FormControl}>
             <label htmlFor="amount">Amount</label>
-            <input type="number" id="amount" value={inputState[0].amount} onChange={event=> inputState[1]({amount:event.target.value})}/>
+            <input type="number" id="amount" value={inputState[0].amount} onChange={event=> {
+                const newAmount = event.target.value;
+                inputState[1]((prevInputState)=>({ amount: newAmount, title: prevInputState.title }))
+              }
+            }/>
           </div>
           <div className={classes.IngredientForm__actions}>
             <button type="submit">Add Ingredient</button>
