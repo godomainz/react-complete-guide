@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
-import { getError } from "../firebaseErrors/errors";
+import { getError } from "../../shared/firebaseErrors";
 
 export const authStart = (): actionTypes.AuthStartAction => {
     return {
