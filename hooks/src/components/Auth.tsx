@@ -1,0 +1,20 @@
+import React from 'react';
+
+import Card from './UI/Card';
+import classes from './Auth.module.css';
+
+const Auth = (props:any) => {
+  const loginHandler = () => {};
+
+  return (
+    <div className={classes.Auth}>
+      <Card>
+        <h2>You are not authenticated!</h2>
+        <p>Please log in to continue.</p>
+        <button onClick={loginHandler}>Log In</button>
+      </Card>
+    </div>
+  );
+};
+
+export default Auth;
