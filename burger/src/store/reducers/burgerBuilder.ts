@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import IngredientState from "../ingredientState";
-import { updateObject } from "../utility";
+import { updateObject } from "../../shared/utility";
 
 const initialState: IngredientState = {
     ingredients: null,
