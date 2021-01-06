@@ -33,7 +33,6 @@ class BurgerBuilder extends Component<Props> {
   }
 
   componentDidMount(){
-    console.log(this.props);
     this.props.onInitIngredients();
   }
 
@@ -51,11 +50,9 @@ class BurgerBuilder extends Component<Props> {
   }
 
   purchaseHandler = () => {
-    console.log("this.props.isAuthenticated "+this.props.isAuthenticated);
     if (this.props.isAuthenticated){
       this.setState({purchasing: true});
     } else {
-      console.log("BurgerBiuilder purchaseHandler onSetAuthRedirectPath")
       this.props.onSetAuthRedirectPath("/checkout");
       this.props.history.push("/auth");
     }
@@ -83,7 +80,6 @@ class BurgerBuilder extends Component<Props> {
     let burger = this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner/>;
     
     if(this.props.ings){
-      console.log(this.props)
       burger = (
         <Aux>
           <Burger ingredients={this.props.ings}/>

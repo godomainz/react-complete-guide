@@ -24,14 +24,12 @@ const WithErrorHandler = (WrappedComponent:any, axios:AxiosInstance) => {
         }
 
         componentWillMount(){
-            console.log("componentWillMount");
             axios.interceptors.request.use((request) =>{
                 this.setState({error: null});
                 return request;
             });
 
             axios.interceptors.response.use(res=>res, error => {
-                console.log(error.message);
                 this.setState({error: error});
                 return Promise.reject(error);
             })
