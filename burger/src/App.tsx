@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import Layout from "./hoc/Layout/Layout";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import Checkout from "./containers/Checkout/Checkout";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter, RouteComponentProps } from "react-router-dom";
 import Orders from "./containers/Checkout/Orders/Orders";
 import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Auth/Logout/Logout";
 import * as actions from "./store/actions/index";
 
-interface Props {
+interface Props extends RouteComponentProps {
   onTryAutoignup: () => void
 }
 
@@ -42,4 +42,4 @@ const mapDispatchToProps = (dispatch:any) => {
   };
 }
 
-export default connect(null,mapDispatchToProps)(App);
+export default withRouter(connect(null,mapDispatchToProps)(App));
