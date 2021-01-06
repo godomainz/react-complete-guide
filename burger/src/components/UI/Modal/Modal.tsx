@@ -15,7 +15,6 @@ class Modal extends Component<Props> {
     }
 
     componentDidUpdate(){
-        console.log('[Modal.tsx] componentDidUpdate');
     }
 
     render(){

@@ -55,7 +55,6 @@ export const auth = (email: string, password: string, isSignup: boolean=true)=> 
         }
         const url = `${urlWithoutKey}${apikey}`;
         axios.post(url, authData).then(response => {
-            console.log(response);
             dispatch(authSuccess(response.data.idToken, response.data.localId, null, false));
             dispatch(checkAuthTimeout(parseInt(response.data.expiresIn)));
         }).catch(err=>{

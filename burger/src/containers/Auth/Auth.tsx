@@ -64,10 +64,8 @@ class Auth extends Component<Props,State> {
 
     componentDidMount() {
         if(this.props.buildingBurger && this.props.authRedirectPath !== "/"){
-            console.log("Auth.tsx componentDidMount onSetAuthRedirectPath")
             this.props.onSetAuthRedirectPath(this.props.authRedirectPath);
         }
-        console.log("Auth this.props.authRedirectPath "+ this.props.authRedirectPath);
     }
 
     checkValidity(value:string, rules:any){
@@ -112,7 +110,6 @@ class Auth extends Component<Props,State> {
                 touched: true
             }
         };
-        console.log(this.state);
         this.setState({controls: updatedControls});
     }
     
@@ -138,13 +135,11 @@ class Auth extends Component<Props,State> {
             });
         }
         let authRedirect = null;
-        console.log("Auth Render " + this.props.authRedirectPath+" "+this.props.isAuthenticated);
         if(this.props.isAuthenticated){
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
 
         let form:JSX.Element[]|JSX.Element= formElementsArray.map((formElement)=>{
-            console.log("formElement.config.valid : " + formElement.config.valid);
             return <Input 
                 key={formElement.id} 
                 elementType={formElement.config.elementType} 

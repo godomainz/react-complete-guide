@@ -13,7 +13,6 @@ class OrderSummery extends Component<Props> {
 
     // This could be a functional component, doesn't have to be a class based component
     componentDidUpdate(){
-        console.log('[OrderSummery.tsx] componentDidUpdate');
     }
 
     render(){
