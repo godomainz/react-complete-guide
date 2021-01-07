@@ -2,18 +2,14 @@ import React, { useState } from 'react';
 import Card from '../UI/Card';
 import classes from './IngredientForm.module.css';
 
-interface IState {
-  title: string;
-  amount: string;
-}
 
 const IngredientForm = React.memo(props => {
-  let initialState:IState = {
-    title: "",
-    amount: ""
-  }
 
-  const [inputState,setInputState] = useState<IState>(initialState);
+   const title:string = "";
+   const amount:string = ""
+ 
+  const [enteredTitle ,setEnteredTitle] = useState<string>(title);
+  const [enteredAmount ,setEnteredAmmount] = useState<string>(amount);
 
   const submitHandler = (event:any) => {
     event.preventDefault();
@@ -26,17 +22,15 @@ const IngredientForm = React.memo(props => {
         <form onSubmit={submitHandler}>
           <div className={classes.FormControl}>
             <label htmlFor="title">Name</label>
-            <input type="text" id="title" value={inputState.title} onChange={event=> {
-                const newTitle = event.target.value;
-                setInputState((prevInputState)=>({ title: newTitle, amount: prevInputState.amount }))
+            <input type="text" id="title" value={enteredTitle} onChange={event=> {
+                setEnteredTitle(event.target.value);
               }
             }/>
           </div>
           <div className={classes.FormControl}>
             <label htmlFor="amount">Amount</label>
-            <input type="number" id="amount" value={inputState.amount} onChange={event=> {
-                const newAmount = event.target.value;
-                setInputState((prevInputState)=>({ amount: newAmount, title: prevInputState.title }))
+            <input type="number" id="amount" value={enteredAmount} onChange={event=> {
+                setEnteredAmmount(event.target.value);
               }
             }/>
           </div>
