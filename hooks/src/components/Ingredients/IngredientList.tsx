@@ -1,8 +1,13 @@
 import React from 'react';
 
 import classes from './IngredientList.module.css';
+import { Ingredient } from "./Ingredient"
+interface Iprops {
+  onRemoveItem:()=>void;
+  ingredients: Ingredient[];
+}
 
-const IngredientList = (props:any) => {
+const IngredientList = (props:Iprops) => {
   return (
     <section className={classes.IngredientList}>
       <h2>Loaded Ingredients</h2>

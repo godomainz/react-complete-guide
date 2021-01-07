@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Card from '../UI/Card';
 import classes from './IngredientForm.module.css';
+import { Ingredient } from "./Ingredient"
 
-
-const IngredientForm = React.memo(props => {
+interface IProps {
+  onAddIngredient: (ingredient: Ingredient) => void;
+}
+const IngredientForm = React.memo((props:IProps) => {
 
    const title:string = "";
    const amount:string = ""
@@ -13,7 +16,7 @@ const IngredientForm = React.memo(props => {
 
   const submitHandler = (event:any) => {
     event.preventDefault();
-    // ...
+    props.onAddIngredient({title:enteredTitle,amount: enteredAmount})
   };
 
   return (
