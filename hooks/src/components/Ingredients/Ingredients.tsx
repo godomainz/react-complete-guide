@@ -23,6 +23,10 @@ const Ingredients = () => {
     });
   },[]);
 
+  useEffect(() => {
+    console.log("RENDERING INGREDIENTS ", userIngredients);
+  },[userIngredients]);
+
   const addIngredientHandler = (ingredient:Ingredient) => {
     fetch("https://react-hooks-update-6f530-default-rtdb.firebaseio.com/ingredients.json",{
       method:"POST",
