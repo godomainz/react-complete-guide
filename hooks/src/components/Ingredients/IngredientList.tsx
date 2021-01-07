@@ -3,7 +3,7 @@ import React from 'react';
 import classes from './IngredientList.module.css';
 import { Ingredient } from "./Ingredient"
 interface Iprops {
-  onRemoveItem:()=>void;
+  onRemoveItem:(id:string)=>void;
   ingredients: Ingredient[];
 }
 
