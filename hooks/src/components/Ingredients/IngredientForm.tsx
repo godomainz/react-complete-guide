@@ -8,12 +8,12 @@ interface IState {
 }
 
 const IngredientForm = React.memo(props => {
-  let state:IState = {
+  let initialState:IState = {
     title: "",
     amount: ""
   }
 
-  const [inputState,setInputState] = useState<IState>(state);
+  const [inputState,setInputState] = useState<IState>(initialState);
 
   const submitHandler = (event:any) => {
     event.preventDefault();
