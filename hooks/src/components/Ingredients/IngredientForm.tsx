@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Card from '../UI/Card';
 import classes from './IngredientForm.module.css';
-import { Ingredient } from "./Ingredient"
+import { Ingredient } from "./Ingredient";
+import LoadingIndicator from "../UI/LoadingIndicator";
 
 interface IProps {
   onAddIngredient: (ingredient: Ingredient) => void;
+  loading: boolean;
 }
 const IngredientForm = React.memo((props:IProps) => {
 
@@ -39,6 +41,7 @@ const IngredientForm = React.memo((props:IProps) => {
           </div>
           <div className={classes.IngredientForm__actions}>
             <button type="submit">Add Ingredient</button>
+            {props.loading && <LoadingIndicator />}
           </div>
         </form>
       </Card>
