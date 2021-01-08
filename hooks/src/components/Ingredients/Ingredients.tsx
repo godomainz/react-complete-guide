@@ -27,6 +27,10 @@ const Ingredients = () => {
     console.log("RENDERING INGREDIENTS ", userIngredients);
   },[userIngredients]);
 
+  const filteredIngredientsHandler = (filteredIngredients:Ingredient[]) => {
+    setUserIngredients(filteredIngredients);
+  }
+
   const addIngredientHandler = (ingredient:Ingredient) => {
     fetch("https://react-hooks-update-6f530-default-rtdb.firebaseio.com/ingredients.json",{
       method:"POST",
@@ -53,7 +57,7 @@ const Ingredients = () => {
       <IngredientForm onAddIngredient={addIngredientHandler}/>
 
       <section>
-        <Search />
+        <Search onLoadIngredients={filteredIngredientsHandler}/>
         <IngredientList ingredients={userIngredients} onRemoveItem={removeIngredientHandler}/>
       </section>
     </div>
