@@ -25,7 +25,7 @@ const Search = React.memo((props:Iprops) => {
           amount: responseData[key].amount
         });
       }
-      // props.onLoadIngredients(loadedIngredients);
+      onLoadIngredients(loadedIngredients);
     });
   },[enteredFilter, onLoadIngredients]);
 
