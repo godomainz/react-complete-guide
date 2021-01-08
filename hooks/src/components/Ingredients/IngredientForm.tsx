@@ -11,7 +11,8 @@ interface IProps {
 const IngredientForm = React.memo((props:IProps) => {
 
    const title:string = "";
-   const amount:string = ""
+   const amount:string = "";
+   console.log("RENDERING IngredientForm");
  
   const [enteredTitle ,setEnteredTitle] = useState<string>(title);
   const [enteredAmount ,setEnteredAmmount] = useState<string>(amount);
