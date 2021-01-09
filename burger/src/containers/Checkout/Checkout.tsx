@@ -5,11 +5,11 @@ import { Route, Redirect } from "react-router-dom";
 import ContactData from "./ContactData/ContactData";
 
 interface Props {
-    history: any;
-    location: any;
-    match: any;
-    ings: any;
-    purchased: boolean;
+    history?: any;
+    location?: any;
+    match?: any;
+    ings?: any;
+    purchased?: boolean;
 }
 
 class Checkout extends Component<Props> {

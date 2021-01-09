@@ -1,26 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { connect } from "react-redux";
 import Layout from "./hoc/Layout/Layout";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import { Route, Switch, withRouter, RouteComponentProps, Redirect } from "react-router-dom";
 import Logout from "./containers/Auth/Logout/Logout";
 import * as actions from "./store/actions/index";
-import asyncComponent from "./hoc/asyncComponent/asyncComponent";
 
 interface Props extends RouteComponentProps {
   onTryAutoignup: () => void,
   isAuthenticated: boolean;
 }
 
-const asyncCheckout = asyncComponent(()=>{
+const Checkout = React.lazy(()=>{
   return import("./containers/Checkout/Checkout");
 });
 
-const asyncOrders = asyncComponent(()=>{
+const Orders = React.lazy(()=>{
   return import("./containers/Checkout/Orders/Orders");
 });
 
-const asyncAuth = asyncComponent(()=>{
+const Auth = React.lazy(()=>{
   return import("./containers/Auth/Auth");
 });
 
@@ -33,7 +32,7 @@ const App = (props:Props) => {
 
     let routes = (
       <Switch>
-        <Route path="/auth" component={asyncAuth} />
+        <Route path="/auth" render={()=><Auth/>} />
         <Route path="/" exact component={BurgerBuilder} />
         <Redirect to="/" />
       </Switch>
@@ -41,9 +40,9 @@ const App = (props:Props) => {
     if (props.isAuthenticated){
       routes = (
         <Switch>
-          <Route path="/checkout" component={asyncCheckout} />
-          <Route path="/orders" component={asyncOrders} />
-          <Route path="/auth" component={asyncAuth} />
+          <Route path="/checkout" render={()=><Checkout/>} />
+          <Route path="/orders" render={()=><Orders/>} />
+          <Route path="/auth" render={()=><Auth/>} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={BurgerBuilder} />
           <Redirect to="/" />
@@ -53,7 +52,7 @@ const App = (props:Props) => {
     return (
       <div>
         <Layout>
-          {routes}
+          <Suspense fallback={<p>Loading</p>}>{routes}</Suspense>
         </Layout>
       </div>
     );
