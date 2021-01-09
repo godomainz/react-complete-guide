@@ -16,6 +16,14 @@ type ActionType = {
     identifier?:any;
 }
 
+const initialState:HttpStateType = {
+  loading: false,
+  error: null,
+  data: null,
+  extra: null,
+  identifier: null
+}
+
 const httpReducer = (curHttpState:HttpStateType, action:ActionType):HttpStateType => {
     switch(action.type){
       case "SEND":
@@ -25,15 +33,17 @@ const httpReducer = (curHttpState:HttpStateType, action:ActionType):HttpStateTyp
       case "ERROR":
         return {loading: false, error: action.errorMessage};
       case "CLEAR":
-        return {...curHttpState, error: null};
+        return initialState;
       default:
         throw new Error("Should not be reached!");
     }
   }
 
 const useHttp = () => {
-    const [httpState, dispatchHttp]= useReducer<Reducer<HttpStateType, ActionType>>(httpReducer, {loading: false, error: null, data: null, extra: null, identifier:null});
+    const [httpState, dispatchHttp]= useReducer<Reducer<HttpStateType, ActionType>>(httpReducer, initialState);
     
+    const clear = useCallback(() => dispatchHttp({type: "CLEAR"}),[]);
+
     const sendRequest = useCallback((url:string, method: string, body?:any, reqExtra?: any, identifier?: any) => {
         dispatchHttp({type:"SEND", identifier:identifier});
         fetch(url,{
@@ -56,7 +66,8 @@ const useHttp = () => {
         error: httpState.error,
         sendRequest : sendRequest,
         reqExtra: httpState.extra,
-        reqIdentifier: httpState.identifier
+        reqIdentifier: httpState.identifier,
+        clear: clear
     };
 }
 

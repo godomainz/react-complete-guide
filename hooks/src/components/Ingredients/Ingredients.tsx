@@ -24,7 +24,7 @@ const ingredientReducer = (currentIngredients:Ingredient[], action:any) => {
 
 const Ingredients = () => {
   const [userIngredients, dispatch]=useReducer(ingredientReducer,[]);
-  const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier } = useHttp();
+  const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier, clear } = useHttp();
 
   useEffect(() => {
     if(!isLoading && !error && reqIdentifier === "REMOVE_INGREDIENT"){
@@ -47,9 +47,6 @@ const Ingredients = () => {
     sendRequest(`https://react-hooks-update-6f530-default-rtdb.firebaseio.com/ingredients/${id}.json`, "DELETE", null, id, "REMOVE_INGREDIENT")
   },[sendRequest]);
 
-  const clearError = useCallback(() => {
-    // dispatchHttp({type:"CLEAR"});
-  },[]);
 
   const ingredientList = useMemo(()=>{
     return (
@@ -59,7 +56,7 @@ const Ingredients = () => {
 
   return (
     <div className="App">
-      {error && <ErrorModal onClose={clearError}>{error}</ErrorModal>}
+      {error && <ErrorModal onClose={clear}>{error}</ErrorModal>}
       <IngredientForm onAddIngredient={addIngredientHandler} loading={isLoading}/>
       <section>
         <Search onLoadIngredients={filteredIngredientsHandler}/>
