@@ -25,13 +25,12 @@ interface Props {
 }
 
 const BurgerBuilder = (props:Props) => {
-
+  const { onInitIngredients } = props;
   const [purchasing, setPurchasing] = useState<boolean>(false);
 
   useEffect(()=>{
-    props.onInitIngredients();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+    onInitIngredients();
+  },[onInitIngredients]);
 
   const updatePurchaseState = (updatedIngredients:any) => {
     const ingredients = {

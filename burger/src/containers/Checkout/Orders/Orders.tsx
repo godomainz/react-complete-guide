@@ -15,11 +15,11 @@ interface Props {
 }
 
 const Orders = (props:Props) => {
- 
+    const {onfetchOrders, token, userId} = props;
+
     useEffect(()=>{
-        props.onfetchOrders(props.token, props.userId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
+        onfetchOrders(token, userId);
+    },[onfetchOrders, token, userId]);
 
     let orders = <Spinner />;
     if (!props.loading){

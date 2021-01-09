@@ -24,11 +24,11 @@ const Auth = React.lazy(()=>{
 });
 
 const App = (props:Props) => {
+  const { onTryAutoignup } = props;
 
   useEffect(()=>{
-    props.onTryAutoignup();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    onTryAutoignup();
+  }, [onTryAutoignup]);
 
     let routes = (
       <Switch>

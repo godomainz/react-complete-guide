@@ -23,13 +23,13 @@ interface Props {
 const Auth = (props:Props) => {
     const [controls, setControls] = useState<Controls>(ControlModal);
     const [isSignUp, setIsSignUp] = useState<boolean>(true);
+    const { onSetAuthRedirectPath, buildingBurger, authRedirectPath } = props;
 
     useEffect(()=>{
-        if(props.buildingBurger && props.authRedirectPath !== "/"){
-            props.onSetAuthRedirectPath(props.authRedirectPath);
+        if(buildingBurger && authRedirectPath !== "/"){
+            onSetAuthRedirectPath(authRedirectPath);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [onSetAuthRedirectPath, buildingBurger, authRedirectPath]);
 
     const inputChangedHandler = (event:any,controlName:string) => {
         const updatedControls = updateObject(controls, {
