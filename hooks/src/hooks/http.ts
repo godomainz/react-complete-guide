@@ -3,21 +3,25 @@ import { Reducer, useReducer, useCallback } from "react";
 type HttpStateType = {
     loading:boolean;
     error?: string | null;
-    data?: string | null;
+    data?: any;
+    extra?: any;
+    identifier?:any;
 }
 
 type ActionType = {
     type: "SEND" | "RESPONSE" | "ERROR" | "CLEAR";
     errorMessage?: string | null;
-    responseData?: string | null;
+    responseData?: any;
+    extra?: any;
+    identifier?:any;
 }
 
 const httpReducer = (curHttpState:HttpStateType, action:ActionType):HttpStateType => {
     switch(action.type){
       case "SEND":
-        return { loading: true, error: null, data: null};
+        return { loading: true, error: null, data: null, extra: null, identifier: action.identifier};
       case "RESPONSE":
-        return {...curHttpState, loading: false, data: action.responseData};
+        return {...curHttpState, loading: false, data: action.responseData, extra: action.extra};
       case "ERROR":
         return {loading: false, error: action.errorMessage};
       case "CLEAR":
@@ -28,10 +32,10 @@ const httpReducer = (curHttpState:HttpStateType, action:ActionType):HttpStateTyp
   }
 
 const useHttp = () => {
-    const [httpState, dispatchHttp]= useReducer<Reducer<HttpStateType, ActionType>>(httpReducer, {loading: false, error: null, data: null});
+    const [httpState, dispatchHttp]= useReducer<Reducer<HttpStateType, ActionType>>(httpReducer, {loading: false, error: null, data: null, extra: null, identifier:null});
     
-    const sendRequest = useCallback((url:string, method: string, body?:any) => {
-        dispatchHttp({type:"SEND"});
+    const sendRequest = useCallback((url:string, method: string, body?:any, reqExtra?: any, identifier?: any) => {
+        dispatchHttp({type:"SEND", identifier:identifier});
         fetch(url,{
             method:method,
             body: body,
@@ -41,7 +45,7 @@ const useHttp = () => {
         }).then((response)=>{
             return response.json();
         }).then(responseData=>{
-            dispatchHttp({ type: "RESPONSE", responseData: responseData})
+            dispatchHttp({ type: "RESPONSE", responseData: responseData, extra: reqExtra})
         }).catch(error=>{
             dispatchHttp({type:"ERROR", errorMessage: error.message});
         });
@@ -50,7 +54,9 @@ const useHttp = () => {
         isLoading: httpState.loading,
         data: httpState.data,
         error: httpState.error,
-        sendRequest : sendRequest
+        sendRequest : sendRequest,
+        reqExtra: httpState.extra,
+        reqIdentifier: httpState.identifier
     };
 }
 

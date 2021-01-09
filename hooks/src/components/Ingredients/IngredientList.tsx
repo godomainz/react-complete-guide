@@ -9,6 +9,7 @@ interface Iprops {
 
 const IngredientList = (props:Iprops) => {
   console.log("RENDERING IngredientList");
+  console.log(props.ingredients);
   return (
     <section className={classes.IngredientList}>
       <h2>Loaded Ingredients</h2>
